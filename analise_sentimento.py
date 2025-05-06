@@ -5,23 +5,23 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-# Baixar recursos do nltk (apenas 1ª vez)
+Baixar recursos do nltk (apenas 1ª vez)
 nltk.download('punkt')
 nltk.download('stopwords')
 
-# Carregar stopwords em inglês
+Carregar stopwords em inglês
 stop_words = set(stopwords.words('english'))
 
-# Analisador de sentimentos
+Analisador de sentimentos
 analyzer = SentimentIntensityAnalyzer()
 
-# === 1. Carregar CSV ===
+1. Carregar CSV ===
 df = pd.read_csv("iphone.csv")
 
-# === 2. texto_completo ===
+2. texto_completo ===
 df['texto_completo'] = df['reviewTitle'].fillna('') + ' ' + df['reviewDescription'].fillna('')
 
-# === 3. texto_limpo ===
+3. texto_limpo ===
 def limpar_texto(texto):
     texto = texto.lower()
     texto = re.sub(r'[^\w\s]', '', texto)
@@ -29,7 +29,7 @@ def limpar_texto(texto):
 
 df['texto_limpo'] = df['texto_completo'].apply(limpar_texto)
 
-# === 4. sentimento (com VADER) ===
+4. sentimento (com VADER) ===
 def classificar_sentimento(texto):
     score = analyzer.polarity_scores(texto)['compound']
     if score >= 0.05:
@@ -41,7 +41,7 @@ def classificar_sentimento(texto):
 
 df['sentimento'] = df['texto_limpo'].apply(classificar_sentimento)
 
-# === 5. palavra_chave ===
+5. palavra_chave ===
 def extrair_palavras_chave(texto):
     tokens = word_tokenize(texto)
     palavras = [palavra for palavra in tokens if palavra not in stop_words and palavra.isalpha()]
@@ -49,7 +49,7 @@ def extrair_palavras_chave(texto):
 
 df['palavra_chave'] = df['texto_limpo'].apply(extrair_palavras_chave)
 
-# === 6. Exportar apenas as colunas desejadas ===
+6. Exportar apenas as colunas desejadas ===
 colunas_finais = ['date', 'ratingScore', 'reviewTitle', 'reviewDescription',
                   'texto_completo', 'texto_limpo', 'sentimento',
                   'palavra_chave', 'variant', 'country']
