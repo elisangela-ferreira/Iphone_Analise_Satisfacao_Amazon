@@ -50,6 +50,10 @@ Tecnologias Utilizadas
 - 📌 DAX (criação de medidas para análise dinâmica)
 - 📁 Arquivos CSV (formato intermediário dos dados para importação no BI)
 
+🔗 Clique aqui para acessar o Dashboard no Power BI
+🔗 [Clique aqui para acessar o Dashboard no Power BI](https://app.powerbi.com/view?r=eyJrIjoiMjk0ODQ2ODEtOTZiNS00ZWRiLWIyNzYtMGRiNjM0OWNiZTExIiwidCI6ImFjNWI3ZmI4LWIxMzUtNGE1MC04ZDQ0LThiZWVkOTRkZDk4ZCJ9)
+
+
 Estrutura do Repositório
 
 ```plaintext
