@@ -1,0 +1,116 @@
+01 - Modelos únicos =
+-- Conta quantos modelos diferentes de iPhones aparecem nas avaliações
+DISTINCTCOUNT('analise_sentimento'[Modelos])
+
+02 - Total de Sentimentos =
+-- Conta o número total de linhas no conjunto de dados de sentimentos
+CALCULATE(COUNTROWS('analise_sentimento'))
+
+03 - Quantidade de Avaliações Únicas =
+-- Conta avaliações únicas (texto completo), mantendo contexto por ano e modelo
+CALCULATE(
+    DISTINCTCOUNT('analise_sentimento'[texto_completo]),
+    ALLEXCEPT('analise_sentimento', 'analise_sentimento'[Data].[Ano], 'analise_sentimento'[Modelos])
+)
+
+04 - Sentimentos Positivos =
+-- Conta quantas avaliações foram classificadas como positivas
+CALCULATE(COUNTROWS('analise_sentimento'), 'analise_sentimento'[Sentimento] = "positivo")
+
+05 - Sentimentos Negativos =
+-- Conta quantas avaliações foram classificadas como negativas
+CALCULATE(COUNTROWS('analise_sentimento'), 'analise_sentimento'[Sentimento] = "Negativo")
+
+06 - Sentimentos Neutros =
+-- Conta quantas avaliações foram classificadas como neutras
+CALCULATE(COUNTROWS('analise_sentimento'), 'analise_sentimento'[Sentimento] = "Neutro")
+
+07 - Média da Nota =
+-- Calcula a média das notas dadas nas avaliações
+AVERAGE('analise_sentimento'[Nota])
+
+08 - Frequência de Palavras =
+-- Conta a quantidade de palavras-chave (útil para frequência geral)
+COUNT('analise_sentimento'[Palavra_Chave])
+
+
+
+📌 01 - Modelos Únicos
+--------------------------------------
+Modelos Únicos =
+DISTINCTCOUNT('analise_sentimento'[Modelos])
+
+-- Conta quantos modelos únicos de iPhones foram avaliados no conjunto de dados.
+-- Ideal para saber a variedade de produtos analisados.
+
+
+📌 02 - Total de Sentimentos
+--------------------------------------
+Total de Sentimentos =
+CALCULATE(COUNTROWS('analise_sentimento'))
+
+-- Retorna o número total de registros (linhas) na tabela, ou seja, o total de avaliações consideradas na análise.
+
+
+📌 03 - Quantidade de Avaliações Únicas
+--------------------------------------
+Quantidade de Avaliações Únicas =
+CALCULATE(
+    DISTINCTCOUNT('analise_sentimento'[texto_completo]),
+    ALLEXCEPT('analise_sentimento', 'analise_sentimento'[Data].[Ano], 'analise_sentimento'[Modelos])
+)
+
+-- Conta a quantidade de avaliações únicas (baseadas no texto completo), mantendo o contexto de Ano e Modelo.
+-- Evita duplicações quando há filtros temporais.
+
+
+📌 04 - Sentimentos Positivos
+--------------------------------------
+Sentimentos Positivos =
+CALCULATE(COUNTROWS('analise_sentimento'), 'analise_sentimento'[Sentimento] = "positivo")
+
+-- Conta quantas avaliações foram classificadas como positivas.
+
+
+📌 05 - Sentimentos Negativos
+--------------------------------------
+Sentimentos Negativos =
+CALCULATE(COUNTROWS('analise_sentimento'), 'analise_sentimento'[Sentimento] = "Negativo")
+
+-- Conta quantas avaliações foram classificadas como negativas.
+
+
+📌 06 - Sentimentos Neutros
+--------------------------------------
+Sentimentos Neutros =
+CALCULATE(COUNTROWS('analise_sentimento'), 'analise_sentimento'[Sentimento] = "Neutro")
+
+-- Conta quantas avaliações foram classificadas como neutras.
+
+
+📌 07 - Média da Nota
+--------------------------------------
+Média da Nota =
+AVERAGE('analise_sentimento'[Nota])
+
+-- Calcula a média geral das notas atribuídas às avaliações.
+
+
+📌 08 - Frequência de Palavras
+--------------------------------------
+Frequência de Palavras =
+COUNT('analise_sentimento'[Palavra_Chave])
+
+-- Conta a quantidade total de palavras-chave identificadas, útil para análise de frequência geral no dataset.
+
+
+📌 09 - Média da Nota por Modelo
+--------------------------------------
+MÉDIA_NOTA_POR_MODELO =
+CALCULATE(
+    AVERAGE('analise_sentimento'[Nota]),
+    ALLEXCEPT('analise_sentimento', 'analise_sentimento'[Modelos])
+)
+
+-- Calcula a média de notas por modelo de iPhone, preservando o contexto de filtro para cada modelo.
+-- Evita que a média seja afetada por outros filtros aplicados fora do escopo do modelo.
