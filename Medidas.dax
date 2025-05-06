@@ -7,7 +7,7 @@ DISTINCTCOUNT('analise_sentimento'[Modelos])
 -- Ideal para saber a variedade de produtos analisados.
 
 
-02 - Total de Sentimentos
+02 - Total de Sentimentos      
 --------------------------------------
 Total de Sentimentos =
 CALCULATE(COUNTROWS('analise_sentimento'))
