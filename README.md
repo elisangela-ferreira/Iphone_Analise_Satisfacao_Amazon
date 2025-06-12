@@ -58,10 +58,11 @@ Estrutura do Repositório
 
 ```plaintext
 ANALISE_AMAZON/
-├── analise_sentimento.py          # Script principal de análise de sentimentos
-├── analise_sentimento.csv         # Arquivo final com os dados analisados
-├── iphone.csv                     # Dataset original com as avaliações
 ├── Descricao-codigo.py            # Explicação do funcionamento do script Python
 ├── Medidas.dax                    # Medidas DAX utilizadas no Power BI
 ├── README.md                      # Explicação geral do projeto
+├── analise_sentimento.csv         # Arquivo final com os dados analisados
+├── analise_sentimento.py          # Script principal de análise de sentimentos
+├── iphone.csv                     # Dataset original com as avaliações
 └── requirements.txt               # Bibliotecas necessárias para rodar o script
+
